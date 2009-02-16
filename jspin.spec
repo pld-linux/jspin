@@ -7,11 +7,12 @@ Summary:	Tools for Teaching Concurrency with Spin
 Summary(pl.UTF-8):	Narzędzia do nauki współbieżności przy użyciu Spin
 Name:		jspin
 Version:	4.6
-Release:	0.1
+Release:	1
 License:	GPLv2
 Group:		Development/Tools
 Source0:	http://stwww.weizmann.ac.il/g-cs/benari/jspin/%{name}-4-6.zip
 # Source0-md5:	0b2866e1eb3709b994ad6ff47c05be0e
+Patch0:		%{name}-config.patch
 URL:		http://stwww.weizmann.ac.il/g-cs/benari/jspin/
 BuildRequires:	jar
 BuildRequires:	jdk
@@ -38,8 +39,13 @@ runtime.
 
 %prep
 %setup -q -c
+%patch0 -p1
 
 %build
+sed -i -e "s|@@BINDIR@@|%{_bindir}|g" \
+	-e "s|@@EXAMPLESDIR@@|%{_examplesdir}/%{name}-%{version}|g" \
+	jspin/Config.java config.cfg 
+
 javac -target 1.5 jspin/*.java
 javac -target 1.5 spinSpider/*.java
 javac -target 1.5 filterSpin/*.java
@@ -53,14 +59,18 @@ jar cfm jSpin.jar \
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},%{_examplesdir}/%{name}-%{version}}
 
-cp -a jspin-examples $RPM_BUILD_ROOT%{_datadir}/%{name}
-cp -a spider-examples $RPM_BUILD_ROOT%{_datadir}/%{name}
+cp -a jspin-examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a spider-examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-echo -e "#!/bin/sh\n\njavaws -jar %{_datadir}/%{name}/jSpin.jar $@" \
+install jSpin.jar $RPM_BUILD_ROOT%{_datadir}/%{name}
+install config.cfg $RPM_BUILD_ROOT%{_datadir}/%{name}
+install txt/help.txt txt/copyright.txt $RPM_BUILD_ROOT%{_datadir}/%{name}
+
+echo -e "#!/bin/sh\n\njava -jar %{_datadir}/%{name}/jSpin.jar $@" \
 	>$RPM_BUILD_ROOT%{_bindir}/jspin
 echo -e "#!/bin/sh\n\njava -cp %{_datadir}/%{name}/jSpin.jar filterSpin.FilterSpin $@" \
 	>$RPM_BUILD_ROOT%{_bindir}/jspin-filter
-echo -e "#!/bin/sh\n\njavaws -cp %{_datadir}/%{name}/jSpin.jar spinSpider.SpinSpider $@" \
+echo -e "#!/bin/sh\n\njava -cp %{_datadir}/%{name}/jSpin.jar spinSpider.SpinSpider $@" \
 	>$RPM_BUILD_ROOT%{_bindir}/jspin-spider
 
 %clean
@@ -68,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc docs/*.pdf txt/help.txt
+%doc docs/*.pdf
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
 %{_examplesdir}/%{name}-%{version}
