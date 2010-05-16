@@ -16,6 +16,7 @@ Patch0:		%{name}-config.patch
 URL:		http://stwww.weizmann.ac.il/g-cs/benari/jspin/
 BuildRequires:	jar
 BuildRequires:	jdk
+BuildRequires:	unzip
 Requires:	jre-X11
 Requires:	spin
 Requires:	graphviz
