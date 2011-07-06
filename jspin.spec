@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Narzędzia do nauki współbieżności przy użyciu Spin
 Name:		jspin
 Version:	5.0
 %define		distver		%(echo %{version} | tr . -)
-Release:	0.1
+Release:	1
 License:	GPLv2
 Group:		Development/Tools
 Source0:	http://jspin.googlecode.com/files/%{name}-%{distver}.zip
