@@ -6,12 +6,12 @@
 Summary:	Tools for Teaching Concurrency with Spin
 Summary(pl.UTF-8):	Narzędzia do nauki współbieżności przy użyciu Spin
 Name:		jspin
-Version:	4.6
-Release:	1
+Version:	5.0
+Release:	0.1
 License:	GPLv2
 Group:		Development/Tools
-Source0:	http://stwww.weizmann.ac.il/g-cs/benari/jspin/%{name}-4-6.zip
-# Source0-md5:	0b2866e1eb3709b994ad6ff47c05be0e
+Source0:	http://jspin.googlecode.com/files/%{name}-5-0.zip
+# Source0-md5:	a4cd4e338a4172004a0c6b5d79cbffc5
 Patch0:		%{name}-config.patch
 URL:		http://stwww.weizmann.ac.il/g-cs/benari/jspin/
 BuildRequires:	jar
