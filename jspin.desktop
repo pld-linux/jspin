@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=jSpin
+Comment=Tools for Teaching Concurrency with Spin
+Comment[pl]=Narzędzia do nauki współbieżności przy użyciu Spin
+Exec=jspin
+Terminal=false
+Type=Application
+Categories=Education;Science;Math;
+# vi: encoding=utf-8
