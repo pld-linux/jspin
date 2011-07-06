@@ -7,7 +7,7 @@
 -SPIN=bin\\spin.exe
 +SPIN=@@BINDIR@@/spin
  LR_DIVIDER=400
- CHECK_OPTIONS=-a -v
+ CHECK_OPTIONS=-a
  VERIFY_MODE=Safety
  VARIABLE_WIDTH=10
  MSC=false
