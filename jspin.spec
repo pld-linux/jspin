@@ -1,8 +1,8 @@
-%define		distver		%(echo %{version} | %{__sed} -e 's/\\./-/g')
 Summary:	Tools for Teaching Concurrency with Spin
 Summary(pl.UTF-8):	Narzędzia do nauki współbieżności przy użyciu Spin
 Name:		jspin
 Version:	5.0
+%define		distver		%(echo %{version} | tr . -)
 Release:	0.1
 License:	GPLv2
 Group:		Development/Tools
