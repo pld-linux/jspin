@@ -35,7 +35,7 @@ dydaktycznych.
 %prep
 %setup -q -c
 find -type f -print0 | xargs -0 dos2unix
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 sed -i -e "s|@@BINDIR@@|%{_bindir}|g" \
